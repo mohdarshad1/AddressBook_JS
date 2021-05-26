@@ -78,6 +78,27 @@ class Contact{
         " State: "+this.state+" Zip: "+this.zip+" Phone Number: "+this.phoneNumber+" Email: "+this.email;
     }
 }
+function addContacts(){
+    let FirstName = prompt("Enter Firstname: ");
+    let LastName = prompt("Enter Lastname: ");
+    if(addressBookArray.find((contact)=>(contact.firstName+contact.lastName)==(FirstName+LastName))){   
+        console.log("Name is already present in addressbook.");
+        return;
+    }
+    let Address = prompt("Enter Address: ");
+    let City = prompt("Enter City name: ");
+    let State = prompt("Enter State name: ");
+    let Zip = prompt("Enter pincode: ");
+    let PhoneNumber = prompt("Enter phone number: ");
+    let EmailId = prompt("Enter email id: ");
+    try{
+        let person = new Contact(FirstName,LastName,Address,City,State,Zip,PhoneNumber,EmailId);
+        addressBookArray.push(person);
+        console.log("Contact is added. ");
+    }catch(e){
+        console.log(e);
+    }
+}
 
 function findContact(userData){
     let contactToEdit;
@@ -146,25 +167,11 @@ let countEntry = 0;
 do{
     countEntry = prompt("Press 1) Add Contact 2) Edit Contact 3) View Contact 4) Delete Contact 5) Number of Contacts 0) Exit: ");
     if(countEntry == 1){
-        let FirstName = prompt("Enter Firstname: ");
-        let LastName = prompt("Enter Lastname: ");
-        let Address = prompt("Enter Address: ");
-        let City = prompt("Enter City name: ");
-        let State = prompt("Enter State name: ");
-        let Zip = prompt("Enter pincode: ");
-        let PhoneNumber = prompt("Enter phone number: ");
-        let EmailId = prompt("Enter email id: ");
-        try{
-            let person = new Contact(FirstName,LastName,Address,City,State,Zip,PhoneNumber,EmailId);
-            addressBookArray.push(person);
-            console.log("Contact is added. ");
-        }catch(e){
-            console.log(e);
-        }
+        addContacts();
     }
     if(countEntry == 2){
         if(addressBookArray.length==0){
-            console.log("No contacts");
+            console.log("No contacts in Addressbook.");
         }
         let userData = prompt("Enter the contact firstname which you want to edit: ");
         findContact(userData); 
